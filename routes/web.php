@@ -12,5 +12,16 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('agenda_eletronica');
 });
+
+
+Route::resource('contacts', 'ContactController');
+Route::resource('companies', 'MessageController');
+
+Route::get('/novo-contato', 'ContactController@index')->name('new-contact');
+Route::get('/nova-mensagem', 'MessageController@index')->name('new-message');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

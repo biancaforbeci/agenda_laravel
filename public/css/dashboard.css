@@ -1,0 +1,279 @@
+dl, ol, ul {
+    margin-top: 0 !important;
+    margin-bottom: 1rem !important;
+}
+
+body {
+    background-color: #edeff0 !important; 
+    padding-top: 90px !important;
+}
+
+/************************ Go Pro *************************/
+.go-pro-bar {
+    background-image: linear-gradient(to right,#f1892c, #FE4389);
+    padding: 30px;
+    margin-bottom: 30px;
+    color: #fff;
+    border-radius: 5px;
+}
+.go-pro-bar a {
+    background-color: #fff;
+    width: 100%;
+    margin-top: 7.5px;
+    float: right;
+    box-shadow: 0px 5px 20px rgba(000, 000, 000, 15%);
+    font-weight: 700;
+    text-align: center;
+    color: #000;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 5px;
+}
+.go-pro-bar a:hover {
+    text-decoration: none;
+}
+.big-t-pro {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+/************************ Continue Last Letf *************************/
+.cont-last-left {
+    background-color: #fff;
+    padding: 30px;
+    margin-bottom: 30px;
+    color: #000;
+    border-radius: 5px;
+}
+.cont-last-left a {
+    background-image: linear-gradient(to right, #03f5e3, #00f7a7);
+    width: 100%;
+    float: right;
+    /* box-shadow: 0px 5px 20px rgba(000, 000, 000, 15%); */
+    font-weight: 700;
+    text-align: center;
+    color: #fff;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 5px;
+}
+.cont-last-left a:hover {
+    text-decoration: none;
+}
+.big-t-cont {
+    font-size: 22px;
+    font-weight: 700;
+    margin-top: 10px !important;
+}
+
+/************************ Sub Nav *************************/
+.subnav {
+    background-color: #fff;
+    box-shadow: 0px 3px 1px rgb(224, 224, 224, 100%);
+    border-radius: 5px;
+    height: auto;
+}
+.subnav a {
+    text-decoration: none;
+    color: #999;
+    border: 2px solid #fff;
+    font-size: 17px;
+    font-weight: 500;
+    padding: 20px 20px 20px 20px !important;
+}
+.subnav a:hover {
+    color: #101010;
+}
+.subnav .active{
+    color: #101010;  
+    font-weight: 600;;
+    border: 2px solid black;
+    background-color: rgba(000, 000, 000, 0.01);
+    border-radius: 5px;
+}
+
+/************************ Your Activity *************************/
+.your-activity {
+    margin-top: 30px;
+}
+.basic-ac-tr-top {
+    padding: 10px 15px 10px 15px;
+    border-radius: 5px 5px 0px 0px;
+    background-color: #fff;
+}
+.basic-ac-tr-btm{
+    padding-top: 10px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 0px 0px 5px 5px;
+    background-color: #fff;
+    border-top: 1px solid rgb(000, 000, 000, 0.05);
+}
+.activity-title {
+    padding-top: 20px !important;
+}
+.ac-big-t {
+    font-size: 50px;
+    font-weight: 700;
+    color: #1B5AFB;
+}
+
+/************************ Inprogress Courses *************************/
+.inprogress-course {
+    margin-left: 0px !important;
+}
+.inprogress-course h6 , .completed-course h6 {
+    color: #101010;
+    font-weight: 600;
+    font-size: 20px;
+}
+.completed-course a h6:hover {
+    text-decoration: none;
+}
+/* CARD */
+.course-block {
+    margin-top: 30px;
+}
+.card {
+    border-radius: 5px 5px 5px 5px !important;
+    border: none !important;
+    box-shadow: 0px 3px 1px rgb(224, 224, 224, 100%);
+    transition: 0.3s ease-in-out;
+}
+.card:hover {
+    box-shadow: 0px 2px 20px rgb(000, 000, 000, 20%);
+    transform: scale(1);
+    transition: 0.3s;
+}   
+.card .progress-bar {
+   background-color: #3DE814;
+}
+.card .progress {
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+    height: 25px;
+    font-weight: 700;
+    border-radius: 3px;
+    border: none !important; 
+    background-color: #e8e8e8 !important; 
+}
+.card .resume-button {
+    font-weight: 400;
+    color: #FFF;
+    margin-left: 20px;
+    margin-bottom: 15px;
+    background: #272727;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 3px;
+    transition: 0.3s;
+}
+.card .resume-button:hover {
+    font-weight: 400;
+    background-color: #272727;
+    color: #FFF;
+    transition: 0.3s;
+    box-shadow: 0px 3px 10px #999;
+}
+/* certi-btn */
+.certi-button {
+    font-weight: 400;
+    color: #FFF;
+    background: #272727;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 3px;
+    transition: 0.3s;
+    font-size: 16px;
+    margin-top: 5px;
+}
+.certi-button:hover {
+    font-weight: 400;
+    border: none;
+    background-color: #272727;
+    color: #FFF;
+    transition: 0.3s;
+    box-shadow: 0px 3px 10px #999;
+}
+/* */
+.card img {
+    border-radius: 5px 5px 0px 0px;
+    height: 210px;
+    width: auto;
+}
+.card-title {
+    margin-top: 20px;
+    margin-left: 20px;
+}
+.card-des p {
+    font-weight: 400 !important;
+    font-size: 17px;
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.card-des .courselevel-badge {
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+.card-des .level-pill {
+    border-radius: 5px;
+    color: black !important;
+    border: 2px solid black;
+    letter-spacing: 1px;
+    font-size: 13px;
+    font-weight: 500;
+    background-color: #FFF;
+    padding: 4px 8px;
+}
+
+/* Trending Course */
+.trending-courses h1 {
+    margin-top: 50px;
+    font-size: 25px;
+}
+.trending-courses p {
+    margin-bottom: 20px;
+    font-size: 17px;
+    font-weight: 500;
+}
+
+/* All Courses & Workshops */
+.all-courses h1 {
+    margin-top: 30px;
+    font-size: 25px;
+}
+.all-courses p {
+    margin-bottom: 20px;
+    font-size: 17px;
+    font-weight: 500;
+}
+
+/****************************** Completed Courses ********************************/
+.all-complete {
+    margin-left: 20px;
+    margin-right: 20px;
+    color: #000;
+}
+.all-complete a:hover {
+    text-decoration: none;
+}
+
+/******************************* COURSE PILLS *******************************/
+.card-des .common-pill {
+    letter-spacing: 1px;
+    font-size: 13px;
+    font-weight: 500;
+    background-color: transparent;
+    padding: 4px 10px;
+    margin-right: 3px;
+}
+.card-des .topic-pill {
+    color: #2FEDAA !important;
+    border: 2px solid #2FEDAA;
+    border-radius: 5px;
+}
+
