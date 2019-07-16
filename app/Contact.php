@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Message;
 
 class Contact extends Model
 {
@@ -14,7 +15,7 @@ class Contact extends Model
         'phone'
     ];
 
-  public function messages(){
-      return $this->hasMany('App\Message');
-  }
+    public function messages(){
+            return $this->hasMany('App\Message');
+    }
 }

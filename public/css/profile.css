@@ -1,0 +1,91 @@
+dl, ol, ul {
+    margin-top: 0 !important;
+    margin-bottom: 1rem !important;
+}
+
+body {
+    background-color: #edeff0 !important;
+    padding-top: 90px !important;
+}
+/* Main */
+
+/* Profile Details */
+.avatar-profile {
+    border: 2px solid #f7f7f7;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+}
+.profile-details {
+    background-color: #FFF;
+    border-radius: 5px;
+    padding: 30px;
+    box-shadow: 0px 3px 1px rgb(224, 224, 224, 100%);
+}
+.profile-details .avatar {
+    border-radius: 100px;
+    width: 120px;
+    height: auto;
+}
+.profile-details .edit-profile-btn a {
+    color: #272727;
+}
+.profile-details .edit-profile-btn a:hover {
+    text-decoration: none;
+    color: #fff;
+}
+
+.profile-details .edit-profile-btn {
+    border: none;
+    border-radius: 3px;
+    color: #fff !important;
+    font-weight: 400 !important;
+    padding: 8px 20px;
+    background-color: #272727;
+    transition: 0.3s;
+}
+.profile-details .edit-profile-btn:hover {
+    border: none;
+    background-color: #272727 !important;
+    color: #FFF !important;
+    transition: 0.3s;
+    box-shadow: 0px 3px 10px #999;
+}
+/* Certificates */
+.messages {
+    margin-top: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 30px;
+    box-shadow: 0px 3px 1px rgb(224, 224, 224, 100%) !important;
+}
+.messages-area-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #272727;
+    text-align: center;
+}
+.messages-box {
+    width: 100%;
+    background-color: #edeff0;
+    height: 180px !important;
+    border-radius: 5px 5px 0px 0px;
+}
+.messages i {
+    font-size: 40px;
+    color: #999;
+    margin-top: 70px;
+}
+.messages-name {
+    border-radius: 0px 0px 5px 5px;
+    background-color: #272727;
+    color: #FFF !important;
+}
+.topic-messages h6 {
+    text-align: center;
+    padding: 15px;
+}
+
+/* .button-message{
+    display:inline-block;
+} */

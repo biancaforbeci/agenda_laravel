@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Message;
+use Illuminate\Support\Facades\View;
+use App\Contact;
 
 class MessageController extends Controller
 {
@@ -14,7 +16,8 @@ class MessageController extends Controller
      */
     public function index()
     {
-      return view("add_message");
+      $messages = Message::all();
+      return response()->json($messages);
     }
 
     /**
@@ -22,9 +25,18 @@ class MessageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function viewNewMessage()
     {
-        //
+        return view("add_message");
+    }
+
+    public function messagesContact($id)
+    {
+       $messages_contact = Message::where('contact_id', '=', $id)->get();
+       $contact = Contact::find($id);
+       $json = json_encode($messages_contact);
+       $jsonContact = json_encode($contact);
+       return View::make('contact_message', compact('messages_contact', 'json'), compact('contact', 'jsonContact'));
     }
 
     /**
@@ -93,10 +105,10 @@ class MessageController extends Controller
 
       if(!$message) {
           return response()->json([
-              'message'   => 'Contato não encontrado !',
+              'message'   => 'Mensagem não encontrada !',
           ], 404);
       }
-
+      error_log($request->description);  
       $message->fill($request->all());
       $message->save();
 

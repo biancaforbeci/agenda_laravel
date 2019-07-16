@@ -20,7 +20,7 @@
 
   <div class="card border">
   <div class="card-body">
-    <h5 class="card-title">Cadastro de Produtos</h5>
+    <h5 class="card-title">Agenda Eletrônica</h5>
 
     <table class="table table-ordered table-hover" id="tabelaProdutos">
       <thead>
@@ -29,6 +29,7 @@
         <th>Sobrenome</td>
         <th>Email</th>
         <th>Telefone</th>
+        <th>Mensagens do Contato</th>
         <th>Edição</th>
         <th>Exclusão</th>
       </tr>
@@ -131,6 +132,7 @@ $.ajaxSetup({ //AJAX com o token CSRF para o formulário
         "<td>" + p.lastname + "</td>" +
         "<td>" + p.email + "</td>" +
         "<td>" + p.phone + "</td>" +
+        "<td>" + '<button class="btn btn-sm btn-success"  onclick="show(' + p.id + ')">  Mensagens </button>' + "</td>" +
         "<td>" + '<button class="btn btn-sm btn-primary"  onclick="editar(' + p.id + ')"> Editar  </button>' +  "</td>" +        //montando cada linha da tabela e retornando
         "<td>" + '<button class="btn btn-sm btn-danger"  onclick="apagar(' + p.id + ')">  Apagar </button>' + "</td>"
         "</tr>"
@@ -186,6 +188,9 @@ $.ajaxSetup({ //AJAX com o token CSRF para o formulário
                 console.log(error);  //se der erro entra aqui
             }
         });
+    }
+    function show(id){
+       window.location.href = "/mensagens-contato/" + id ;
     }
     function salvarProduto() {
         contact = {

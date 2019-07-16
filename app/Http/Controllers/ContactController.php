@@ -15,7 +15,7 @@ class ContactController extends Controller
     public function index()
     {
       $contacts = Contact::all();
-      return response()->json($contacts);      
+      return response()->json($contacts);
     }
 
     /**
@@ -23,9 +23,14 @@ class ContactController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function viewContacts()
     {
+      return view("agenda_eletronica");
+    }
 
+    public function viewMessageContact($id)
+    {
+        return redirect()->route('message-contact', ['name' => $contact->name]);
     }
 
     /**

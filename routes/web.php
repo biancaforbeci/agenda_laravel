@@ -16,12 +16,8 @@ Route::get('/', function () {
 });
 
 
-Route::resource('contacts', 'ContactController');
-Route::resource('companies', 'MessageController');
 
-Route::get('/novo-contato', 'ContactController@index')->name('new-contact');
-Route::get('/nova-mensagem', 'MessageController@index')->name('new-message');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/contatos', 'ContactController@viewContacts')->name('new-contact');
+Route::get('/nova-mensagem', 'MessageController@viewNewMessage')->name('new-message');
+Route::get('/mensagens-contato/{id}', 'MessageController@messagesContact')->name('message-contact');
+Route::get('/mensagens/{name}', 'MessageController@viewMessageContact')->name('message-contact');
