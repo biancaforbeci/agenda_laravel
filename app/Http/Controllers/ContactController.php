@@ -24,23 +24,18 @@ class ContactController extends Controller
     }
 
     /**
-    * Display a listing of the resource.
+    * pegando lista por nomes
     *
     * @return \Illuminate\Http\Response
     */
     public function takingNames(Request $request)
     {
-      $term = $request->get('search');
-
         // procurando por nome
-      $contacts = Contact::where("name","LIKE","%{$request->input('search')}%")
-                  ->select('id', 'name')
+      $contacts = Contact::select('id', 'name')
+                  ->where('name', 'LIKE', "%".$request->input('search')."%")
+                  // ->select('id', 'name')
                   ->take(4)
                   ->get();
-
-            foreach ($contacts as $contact) {
-                $contact->label = $contact->name . ' (' . $contact->phone . ')';
-            }
 
         return response()->json($contacts);
     }
