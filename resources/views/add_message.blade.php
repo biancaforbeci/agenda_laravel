@@ -16,36 +16,47 @@
 
 @section('content')
 
-<div class="container">
+  <div class="container">
 
-            <form class="form-horizontal" id="formProduto">
-                <div class="modal-header">
-                    <h5 class="modal-title">Nova Mensagem</h5>
-                </div>
-                <div class="modal-body">
+    <div class="card border">
+    <div class="card-body">
 
+      <h3 style="text-align:center;"><b>Nova Mensagem</b></h3>
+      <br>
+      <br>
+
+      <form class="form-horizontal" id="formProduto">
                     <div class="form-group">
-                        <label for="contacts" class="control-label">Selecione qual contato deseja enviar uma mensagem</label>
+                        <h5 for="contacts" style="text-align:left;">Digite o nome do contato e selecione uma opção</h5>
                         <div class="input-group">
-                            <select class="form-control" id="contacts" >
-                            </select>
+                          <div class="col-md-12 text-center">
+                              <input type="text" class="typeahead" id="show-contact" name="show_contact" value="" required>
+                                  {{-- {{ $errors->first('contact_id', '<span class="help-inline">:message</span>') }} --}}
+                           </div>
                         </div>
                     </div>
 
-                    <input type="hidden" id="id" class="form-control">
+                    <input type="hidden" id="contact_id" name="contact_id" value="" />
+
+
+                  </br>
+                  </br>
+                  </br>
+
                     <div class="form-group">
-                        <label for="message">Mensagem</label>
+                        <h5 for="contacts" style="text-align:left;">Mensagem</h5>
                         <div class="input-group">
-                            <textarea class="form-control" id="message" rows="7"></textarea>
+                            <textarea class="form-control" id="message" rows="7" required></textarea>
                         </div>
                     </div>
-                </div>
+
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Salvar</button>
+                    <button type="submit" class="btn btn-success">Salvar</button>
                 </div>
             </form>
 
-
+      </div>
+    </div>
 </div>
 @endsection
 
@@ -55,8 +66,12 @@
 <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap.js') }}"></script>
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap.bundle.js') }}"></script>
+<script src="{{ asset('js/jquery.js') }}"></script>
+<script src="{{ asset('js/jquery-ui.min.js') }}"></script>
+<script src="{{ asset('js/jquery-ui.js') }}" ></script>
+<script src="{{ asset('js/bootstrap3-typeahead.min.js') }}" ></script>
+<script src="{{ asset('js/typeahead.bundle.min.js') }}" ></script>
 
 <script type="text/javascript">
 $.ajaxSetup({ //AJAX com o token CSRF para o formulário
@@ -64,24 +79,10 @@ $.ajaxSetup({ //AJAX com o token CSRF para o formulário
         'X-CSRF-TOKEN': "{{ csrf_token() }}"
     }
 });
-    function novaMensagem() {
-      $('#id').val('');                //função para zerar todos os campos preenchidos e mostrar o modal com o formulário
-      $('#contacts').val('');
-      $('#message').val('');
-      $('#dlgProdutos').modal('show');  //mostra formulário
-    }
-    function carregarCategorias(){
-      $.getJSON('/api/loadContacts',function(data){          //função para mostrar todas as categorias cadastradas no select do formulário
-        for(i=0;i<data.length;i++){
-          option = '<option value= "' + data[i].id + '">' + data[i].name + '</option>';
-          $('#contacts').append(option);  //seta categoria no select do formulário
-        }
-      });
-    }
 
-    function criarProduto() {
+    function newMessage() {
         message = {
-            contact_id: $("#contacts").val(),
+            contact_id: $("#contact_id").val(),
             description: $("#message").val()
         };
         $.post("/api/messages", message, function(data) {
@@ -91,11 +92,34 @@ $.ajaxSetup({ //AJAX com o token CSRF para o formulário
 
     $("#formProduto").submit( function(event){
         event.preventDefault();
-        criarProduto();
-        $("#dlgProdutos").modal('hide');      //esconde o modal.
+        newMessage();
     });
-    $(function(){
-      carregarCategorias();       //chamando as funções
-    })
 </script>
+
+<script>
+
+var contacts = new Bloodhound({
+datumTokenizer: Bloodhound.tokenizers.obj.whitespace('nome'),
+queryTokenizer: Bloodhound.tokenizers.whitespace,
+prefetch: 'http://localhost:8000/api/loadContacts',
+remote: {
+url: 'http://localhost:8000/api/loadContacts?query=%query',
+'wildcard': '%query'
+}
+});
+
+$('#show-contact').typeahead(null, {
+name: 'contacts',
+display: 'name',
+source: contacts
+});
+
+
+$('#show-contact').bind('typeahead:select', function(ev, suggestion) {
+$("#contact_id").val(suggestion.id);
+});
+
+</script>
+
+
 @endsection

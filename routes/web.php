@@ -19,5 +19,5 @@ Route::get('/', function () {
 
 Route::get('/contatos', 'ContactController@viewContacts')->name('new-contact');
 Route::get('/nova-mensagem', 'MessageController@viewNewMessage')->name('new-message');
-Route::get('/mensagens-contato/{id}', 'MessageController@messagesContact')->name('message-contact');
-Route::get('/mensagens/{name}', 'MessageController@viewMessageContact')->name('message-contact');
+Route::get('/mensagens-contato/{id}', 'ContactController@viewMessageContact')->name('message-contact');
+Route::get('/mensagens/{name}', 'MessageController@messagesContact')->name('return-viewNewMessage');

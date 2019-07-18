@@ -38,7 +38,7 @@ width: 90px;" alt="">
         <hr>
 				<div class="contact-details">
 
-					<p id="name" class="contact-name-lastname"> {{$jsonObjContact->name}} </p>
+					<p id="name" class="contact-name-lastname"> {{$jsonObjContact->name}} {{$jsonObjContact->lastname}}</p>
 
 					<div class="contact-message-email">
             <p id="email" class="contact-email"> {{$jsonObjContact->email}}  </p>
@@ -72,15 +72,19 @@ width: 90px;" alt="">
 					<div class="col-lg-4">
 						<div class="topic-messages">
 
-              <p id="date"> {{$message['created_at']}} </p>
+              <div style="display: inline-block; text-align: left; width: 100%">
+                <p id="date"> <b> Mensagem salva em  {{$message['created_at']}} </b></p>
+              </div>
+
+            </br>
 
               <p id="message"> {{$message['description']}} </p>
 
 
               <p>
-                 <button class="button-message btn btn-sm btn-primary"  onclick="editar({{$message['id']}})"> Editar  </button>
+                 <button class="button-message btn btn-sm btn-primary"  onclick="editMessage({{$message['id']}})"> Editar  </button>
 
-                 <button class="button-message btn btn-sm btn-danger"  onclick="apagar({{$message['id']}})"> Apagar </button>
+                 <button class="button-message btn btn-sm btn-danger"  onclick="deleteMessage({{$message['id']}})"> Apagar </button>
                </p>
 
 						</div>
@@ -112,7 +116,7 @@ width: 90px;" alt="">
                     <input type="hidden" value="" id="id">
 
                     <div class="form-group">
-                        <label for="contacts" class="control-label">Selecione qual contato deseja enviar uma mensagem</label>
+                        <label for="contacts" class="control-label">Contato</label>
                         <div class="input-group">
                             <select class="form-control" id="contacts" >
                             </select>
@@ -156,27 +160,24 @@ width: 90px;" alt="">
       }
   });
 
-    function editar(id) {
+    function editMessage(id) {
           $.getJSON('/api/messages/'+id, function(data) {
               console.log(data);
               $('#id').val(data.id);
-              // document.getElementById("message").value = data.description;
               $("textarea#message").val(data.description);
-              carregarCategorias();
+              loadContact(data.contact_id);
           });
     }
 
-    function carregarCategorias(){
-      $.getJSON('/api/loadContacts',function(data){          //função para mostrar todas as categorias cadastradas no select do formulário
-        for(i=0;i<data.length;i++){
-          option = '<option value= "' + data[i].id + '">' + data[i].name + '</option>';
-          $('#contacts').append(option);  //seta categoria no select do formulário
-        }
+    function loadContact(id){
+      $.getJSON('/api/contacts/'+id, function(data) {
+          option = '<option value= "' + data.id + '">' + data.name + '</option>';
+          $('#contacts').append(option);
       });
-      $('#dlgMessages').modal('show');  //mostra formulário
+      $('#dlgMessages').modal('show');
     }
 
-    function apagar(id) {
+    function deleteMessage(id) {
           $.ajax({
               type: "DELETE",
               url: "/api/messages/" + id,
@@ -191,7 +192,7 @@ width: 90px;" alt="">
           });
       }
 
-      function salvarProduto() {
+      function saveMessage() {
           message = {
               id : $("#id").val(),
               contact_id: $("#contacts").val(),
@@ -213,7 +214,7 @@ width: 90px;" alt="">
       }
       $("#formMessage").submit( function(event){
           event.preventDefault();
-          salvarProduto();
+          saveMessage();
           $("#dlgMessages").modal('hide');      //esconde o modal.
       });
   </script>

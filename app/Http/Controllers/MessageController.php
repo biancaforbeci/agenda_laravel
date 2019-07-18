@@ -6,11 +6,12 @@ use Illuminate\Http\Request;
 use App\Message;
 use Illuminate\Support\Facades\View;
 use App\Contact;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class MessageController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * retorna todas as mensagens independe de contato
      *
      * @return \Illuminate\Http\Response
      */
@@ -21,7 +22,7 @@ class MessageController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * show view enviar mensagem.
      *
      * @return \Illuminate\Http\Response
      */
@@ -30,10 +31,20 @@ class MessageController extends Controller
         return view("add_message");
     }
 
-    public function messagesContact($id)
+    //encontrar mensagem de um contato.
+    public function messagesContact($array)
     {
-       $messages_contact = Message::where('contact_id', '=', $id)->get();
-       $contact = Contact::find($id);
+      $session = new Session();
+      $contact = $session->get('contact');
+
+       if(empty($contact)){
+         return redirect()->back();
+       }else{
+         $session = new Session();
+         $session->set('contact', $contact);
+       }
+
+       $messages_contact = Message::where('contact_id', '=', $contact->id)->get();
        $json = json_encode($messages_contact);
        $jsonContact = json_encode($contact);
        return View::make('contact_message', compact('messages_contact', 'json'), compact('contact', 'jsonContact'));
@@ -47,6 +58,7 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
+      error_log($request);
       $message = new Message();
       $message->fill($request->all());
       $message->save();
@@ -108,7 +120,7 @@ class MessageController extends Controller
               'message'   => 'Mensagem não encontrada !',
           ], 404);
       }
-      error_log($request->description);  
+      error_log($request->description);
       $message->fill($request->all());
       $message->save();
 

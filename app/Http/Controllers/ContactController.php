@@ -4,22 +4,49 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Contact;
+use DB;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class ContactController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Todos os contatos
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-      $contacts = Contact::all();
+      $contacts = DB::table('contacts')
+       ->select('id', 'name', 'lastname','email','phone')
+       ->orderBy('name', 'asc')
+       ->get();
       return response()->json($contacts);
     }
 
     /**
-     * Show the form for creating a new resource.
+    * Display a listing of the resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function takingNames(Request $request)
+    {
+      $term = $request->get('search');
+
+        // procurando por nome
+      $contacts = Contact::where("name","LIKE","%{$request->input('search')}%")
+                  ->select('id', 'name')
+                  ->take(4)
+                  ->get();
+
+            foreach ($contacts as $contact) {
+                $contact->label = $contact->name . ' (' . $contact->phone . ')';
+            }
+
+        return response()->json($contacts);
+    }
+
+    /**
+     * Show view agenda_eletronica
      *
      * @return \Illuminate\Http\Response
      */
@@ -28,13 +55,27 @@ class ContactController extends Controller
       return view("agenda_eletronica");
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function viewMessageContact($id)
     {
-        return redirect()->route('message-contact', ['name' => $contact->name]);
+        $contact = Contact::find($id);
+
+        if(!$contact) {
+            return redirect()->back();
+        }
+
+        $session = new Session();
+        $session->set('contact', $contact);
+
+        return redirect()->route('return-viewNewMessage', ['name' => $contact->name]);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * saving contact
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -49,7 +90,7 @@ class ContactController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * find contact
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -68,7 +109,7 @@ class ContactController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * show contact to edit
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -87,7 +128,7 @@ class ContactController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * update contact
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -110,7 +151,7 @@ class ContactController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * delete contact
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
