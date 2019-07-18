@@ -8,7 +8,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
-    <link href="{{ asset('css/add_message.css') }}" rel="stylesheet">    
+    <link href="{{ asset('css/add_message.css') }}" rel="stylesheet">
 </head>
 <body align="center">
     <div class="container">
@@ -49,7 +49,7 @@
 
                 <div class="modal-footer">
                   </br>
-                  <button class="btn btn-info"  style="margin:50px left;width:100px;" onclick="show()"> Voltar </button>
+                  <button type="button" class="btn btn-info"  style="margin:50px left;width:100px;" onclick="show()"> Voltar </button>
                   <button type="submit" style="margin:50px left;width:100px;" class="btn btn-success">Salvar</button>
                 </div>
             </form>
